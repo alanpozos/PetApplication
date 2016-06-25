@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvMascota"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="@dimen/corner_radius_cardview"
+    android:layout_marginBottom="13dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/imgMascota"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/perrorosa"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/imgBtnRaiting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dog_bone_48"/>
+
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sam"
+                android:layout_toRightOf="@+id/imgBtnRaiting"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvRaitingTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:layout_toLeftOf="@+id/imgRaitingTotal"
+                android:layout_marginTop="5dp" />
+
+            <ImageView
+                android:id="@+id/imgRaitingTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dog_bone_48color"
+                android:layout_alignParentRight="true"                                   />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>
+
+

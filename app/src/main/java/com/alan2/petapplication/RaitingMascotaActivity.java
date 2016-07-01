@@ -7,6 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
+import com.alan2.petapplication.adapter.MascotaAdaptador;
+import com.alan2.petapplication.pojo.Mascota;
+
 import java.util.ArrayList;
 
 public class RaitingMascotaActivity extends AppCompatActivity {
@@ -54,7 +58,7 @@ public class RaitingMascotaActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Petagram");
 
         if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.left_48);
+            ab.setHomeAsUpIndicator(R.drawable.left_48black);
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }

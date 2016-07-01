@@ -1,62 +1,67 @@
 package com.alan2.petapplication;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import com.alan2.petapplication.adapter.MascotaAdaptador;
+import com.alan2.petapplication.adapter.PageAdapter;
+import com.alan2.petapplication.fragment.PerfilMascotaFragment;
+import com.alan2.petapplication.fragment.RecyclerViewPrincipalFragment;
+import com.alan2.petapplication.pojo.Mascota;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Mascota> mascotas;
-    private RecyclerView listaMascotas;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setToolbar();
+        //setToolbar();
 
-        listaMascotas = (RecyclerView) findViewById(R.id.rvMascotas);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        setUpViewPager();
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        listaMascotas.setLayoutManager(llm);
-
-        inicializarListaMascotas();
-        inicializarAdapatador();
+        if(toolbar !=null){
+            setSupportActionBar(toolbar);
+        }
     }
 
-    public MascotaAdaptador adaptador;
-    public void inicializarAdapatador(){
-        adaptador = new MascotaAdaptador(mascotas, this);
-        listaMascotas.setAdapter(adaptador);
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new RecyclerViewPrincipalFragment());
+        fragments.add(new PerfilMascotaFragment());
+        return fragments;
     }
 
-    public void inicializarListaMascotas(){
-
-        mascotas = new ArrayList<Mascota>();
-        mascotas.add(new Mascota(R.drawable.perrorosa, "Nicky",R.drawable.dog_bone_48,3,R.drawable.dog_bone_48color));
-        mascotas.add(new Mascota(R.drawable.perro, "Shumy",R.drawable.dog_bone_48,4,R.drawable.dog_bone_48color));
-        mascotas.add(new Mascota(R.drawable.cabezera_perro, "Gibby",R.drawable.dog_bone_48,1,R.drawable.dog_bone_48color));
-        mascotas.add(new Mascota(R.drawable.fdsd, "Scup",R.drawable.dog_bone_48,9,R.drawable.dog_bone_48color));
-        mascotas.add(new Mascota(R.drawable.imagen_png_de_perro_golden_by_dana198_d4qjavl, "Toby",R.drawable.dog_bone_48,6,R.drawable.dog_bone_48color));
+    private void setUpViewPager(){
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.home_48);
+        tabLayout.getTabAt(1).setIcon(R.drawable.corgi_48);
     }
 
-    private void setToolbar(){
+
+    /*private void setToolbar(){
         Toolbar miActionBar = (Toolbar) findViewById(R.id.actionbarMain);
         setSupportActionBar(miActionBar);
         getSupportActionBar().setTitle("Petagram");
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_raiting:
                 Intent intent = new Intent(MainActivity.this, RaitingMascotaActivity.class);
                 startActivity(intent);
-                return true;
+                break;
+            case R.id.action_contacto:
+                Intent intent1 = new Intent(this, ContactoActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.action_acercade:
+                Intent intent2 = new Intent(this, AcercaDeActivity.class);
+                startActivity(intent2);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

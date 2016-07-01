@@ -1,4 +1,4 @@
-package com.alan2.petapplication;
+package com.alan2.petapplication.pojo;
 
 /**
  * Created by Alan2 on 23/06/2016.

@@ -5,19 +5,32 @@ package com.alan2.petapplication.pojo;
  */
 public class Mascota {
 
-    private int foto;
-    private int imgBtnRaiting;
+    private int idMascota;
     private String nombre;
+    private int foto;
+
     private int RaitingTotal;
+
+    private int imgBtnRaiting;
     private int imgRaiting;
 
+
     public Mascota(int foto, String nombre, int imgBtnRaiting, int raiting, int imgRaiting) {
+
         this.foto = foto;
         this.nombre = nombre;
         this.imgBtnRaiting = imgBtnRaiting;
         this.imgRaiting = imgRaiting;
         this.RaitingTotal = raiting;
     }
+
+    public Mascota() {
+
+    }
+
+    public int getIdMascota() { return idMascota;   }
+
+    public void setIdMascota(int idMascota) { this.idMascota = idMascota; }
 
     public int getFoto() {
         return foto;

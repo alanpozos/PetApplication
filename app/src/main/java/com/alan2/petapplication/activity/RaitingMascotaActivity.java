@@ -1,22 +1,35 @@
-package com.alan2.petapplication;
+package com.alan2.petapplication.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.alan2.petapplication.R;
 import com.alan2.petapplication.adapter.MascotaAdaptador;
 import com.alan2.petapplication.pojo.Mascota;
+import com.alan2.petapplication.presentador.IRaitingMascotaActivityPresenter;
+import com.alan2.petapplication.presentador.RaitingMascotaActivityPresenter;
 
+
+import java.security.AccessController;
 import java.util.ArrayList;
 
-public class RaitingMascotaActivity extends AppCompatActivity {
+public class RaitingMascotaActivity extends AppCompatActivity implements IRaitingMascotaActivityView {
 
     ArrayList<Mascota> mascotas;
     private RecyclerView listaRaitingMascotas;
+    private IRaitingMascotaActivityPresenter presenter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +37,9 @@ public class RaitingMascotaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_raiting_mascota);
 
         setToolbar();
-
         listaRaitingMascotas = (RecyclerView) findViewById(R.id.rvRaitingMascotas);
+        //presenter = new RaitingMascotaActivityPresenter(this, getApplicationContext());
+
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -33,6 +47,7 @@ public class RaitingMascotaActivity extends AppCompatActivity {
 
         inicializarListaRaitingMascotas();
         inicializarAdapatador();
+
     }
 
     public MascotaAdaptador adaptador;
@@ -67,5 +82,23 @@ public class RaitingMascotaActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_raiting, menu);
         return true;
+    }
+
+    @Override
+    public void generarLinearlayoutVertical() {
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        listaRaitingMascotas.setLayoutManager(llm);
+    }
+
+    @Override
+    public MascotaAdaptador crearAdaptador(ArrayList<Mascota> mascotas) {
+        MascotaAdaptador adaptador  = new MascotaAdaptador(mascotas, this);
+        return adaptador;
+    }
+
+    @Override
+    public void inicializarAdaptadorRV(MascotaAdaptador adaptador) {
+        listaRaitingMascotas.setAdapter(adaptador);
     }
 }
